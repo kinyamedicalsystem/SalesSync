@@ -4,7 +4,7 @@ import ReactDOMServer from "react-dom/server"
 import ServicePrint from "./ServicePrint";
 
 export default function Service() {
-    const API=import.meta.env.VITE_BACKEND_URL;
+    const API=import.meta.env.VITE_BACKEND_URL
     const inputStyle = "w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-2.5 text-gray-300 focus:border-blue-500 my-3 "
     const linkStyle = "px-4 py-2 rounded-lg text-sm font-medium transition-all bg-indigo-500/30 duration-300 text-gray-300 hover:text-white hover:bg-indigo-500/10";
     const Detail = ({ label, value }) => (
@@ -295,53 +295,30 @@ const handleDelete = async (id) => {
         return Object.keys(newErrors).length === 0;
     };
 
+const handlePrint = (record) => {
+  const printContent = ReactDOMServer.renderToString(
+    <ServicePrint record={record} format={formatDateTime} />
+  );
 
-    const handlePrint = (record) => {
-    
-        const printContent = ReactDOMServer.renderToString(
-            <ServicePrint record={record} format={formatDateTime}/>
-        );
-    
-        const printWindow = window.open("", "_blank");
-    
-        printWindow.document.write(`
-            <html>
-                <head>
-                    <title>Installation Report</title>           
-                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-                    <script src="https://cdn.tailwindcss.com"></script>
-    
-                </head>
-    
-                <body>
-                
-                    <style>
-                        body{
-                            margin:0;
-                            padding:20px;
-                            background:white;
-                        }
-    
-                        @media print{
-                            body{
-                                padding:0;
-                            }
-                        }
-                    </style>
-                    ${printContent}
-                </body>
-            </html>
-        `);
-    
-        printWindow.document.close();
-    
-        setTimeout(() => {
-            printWindow.focus();
-            printWindow.print();
-            printWindow.close();
-        }, 500);
-    };
+  const originalContent = document.body.innerHTML;
 
+  document.body.innerHTML = `
+    <html>
+      <head>
+        <title>Print</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+      </head>
+      <body style="background:white;">
+        ${printContent}
+      </body>
+    </html>
+  `;
+
+  window.print();
+
+  document.body.innerHTML = originalContent;
+  window.location.reload();
+};
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
@@ -793,7 +770,7 @@ const handleDelete = async (id) => {
 
                                     <div>
                                         <div className="text-gray-400 mb-2">Engineer</div>
-                                        {UserName.toLowerCase() === (r.engineerName).toLowerCase() ?
+                                        {UserName.toLowerCase() === r.engineerName?.toLowerCase() ?
                                             (<div className="text-purple-200 bg-purple-500/50 border border-purple-500 rounded-full inline px-2 py-1 ">{r.engineerName}</div>) : (<div className="text-white">{r.engineerName}</div>)}
                                     </div>
 

@@ -269,51 +269,29 @@ export default function Intallation() {
         return Object.keys(newErrors).length === 0;
     };
 
+const handlePrint = (record) => {
+  const printContent = ReactDOMServer.renderToString(
+    <InstallationPrint record={record} format={formatDateTime} />
+  );
 
-   const handlePrint = (record) => {
+  const originalContent = document.body.innerHTML;
 
-    const printContent = ReactDOMServer.renderToString(
-        <InstallationPrint record={record} format={formatDateTime}/>
-    );
+  document.body.innerHTML = `
+    <html>
+      <head>
+        <title>Print</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+      </head>
+      <body style="background:white;">
+        ${printContent}
+      </body>
+    </html>
+  `;
 
-    const printWindow = window.open("", "_blank");
+  window.print();
 
-    printWindow.document.write(`
-        <html>
-            <head>
-                <title>Installation Report</title>           
-                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-                <script src="https://cdn.tailwindcss.com"></script>
-
-            </head>
-
-            <body>
-            
-                <style>
-                    body{
-                        margin:0;
-                        padding:20px;
-                        background:white;
-                    }
-
-                    @media print{
-                        body{
-                            padding:0;
-                        }
-                    }
-                </style>
-                ${printContent}
-            </body>
-        </html>
-    `);
-
-    printWindow.document.close();
-
-    setTimeout(() => {
-        printWindow.focus();
-        printWindow.print();
-        printWindow.close();
-    }, 500);
+  document.body.innerHTML = originalContent;
+  window.location.reload();
 };
    return (
 
@@ -781,7 +759,7 @@ export default function Intallation() {
 
                                     <div>
                                         <div className="text-gray-400 mb-2">Engineer</div>
-                                        {UserName.toLocaleLowerCase() === (r.engineerName).toLocaleLowerCase() ?
+                                        {UserName.toLowerCase() === r.engineerName?.toLowerCase() ?
                                             (<div className="text-purple-200 bg-purple-500/50 border border-purple-500 rounded-full inline px-2 py-1 ">{r.engineerName}</div>) : (<div className="text-white">{r.engineerName}</div>)}
                                     </div>
 
