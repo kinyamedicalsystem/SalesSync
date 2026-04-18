@@ -85,9 +85,9 @@ export default function Service() {
         closedDate: "",
         engineerName: "",
     })
-    const [spares, setSpares] = useState([{ id: "", spare: "", qty: 1, price: "" }])
+    const [spares, setSpares] = useState([{ spare: "", qty: 1, price: "" }])
     const addspare = () => {
-        setSpares(prev => [...prev, { id: "", spare: "", qty: 1, price: "" }])
+        setSpares(prev => [...prev, { spare: "", qty: 1, price: "" }])
     }
     const deletespare = (index) => {
         setSpares(prev => prev.filter((_, i) => i !== index))
@@ -198,7 +198,7 @@ export default function Service() {
             closedDate: "",
             engineerName: ""
         }),
-            setSpares([{ id: "", spare: "", qty: 1, price: "" }])
+            setSpares([{ spare: "", qty: 1, price: "" }])
             setFormError({})
             setEditMode(false)
             
@@ -771,7 +771,7 @@ const handlePrint = (record) => {
                                     <div>
                                         <div className="text-gray-400 mb-2">Engineer</div>
                                         {UserName.toLowerCase() === r.engineerName?.toLowerCase() ?
-                                            (<div className="text-purple-200 bg-purple-500/50 border border-purple-500 rounded-full inline px-2 py-1 ">{r.engineerName}</div>) : (<div className="text-white">{r.engineerName}</div>)}
+                                            (<div className="text-purple-200 bg-purple-500/50 border border-purple-500 rounded-full inline-block px-2 py-1 ">{r.engineerName}</div>) : (<div className="text-white">{r.engineerName}</div>)}
                                     </div>
 
                                     <div>
