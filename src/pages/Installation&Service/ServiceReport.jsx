@@ -4,6 +4,7 @@ import ReactDOMServer from "react-dom/server"
 import ServicePrint from "./ServicePrint";
 
 export default function Service() {
+    const API=import.meta.env.VITE_BACKEND_URL;
     const inputStyle = "w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-2.5 text-gray-300 focus:border-blue-500 my-3 "
     const linkStyle = "px-4 py-2 rounded-lg text-sm font-medium transition-all bg-indigo-500/30 duration-300 text-gray-300 hover:text-white hover:bg-indigo-500/10";
     const Detail = ({ label, value }) => (
@@ -48,7 +49,7 @@ export default function Service() {
     const fetchRecords=async() => {
         setLoading(true)
         try{
-            const res=await axios.get("http://localhost:8085/api/services")
+            const res=await axios.get(`${API}/api/services`)
                 setRecords(res.data)
                 setFilteredRecords(res.data)
                 setSearchTerm("")
@@ -140,14 +141,14 @@ export default function Service() {
 
         try {
             if (editMode) {
-                const res = await axios.put(`http://localhost:8085/api/services/${editRecord.id}`, payload);
+                const res = await axios.put(`${API}/api/services/${editRecord.id}`, payload);
                 setRecords(prev => prev.map(r => r.id === editRecord.id ? res.data : r))
                  setFilteredRecords(prev => prev.map(r => r.id === editRecord.id ? res.data : r))
                 setSuccess("Updated Successfully");
                 setTimeout(() => { setActiveTab("viewRepo") }, 700)
             }
             else {
-                const res = await axios.post("http://localhost:8085/api/services", payload);
+                const res = await axios.post(`${API}/api/services`, payload);
                 setRecords(prev => [res.data,...prev]);
                  setFilteredRecords(prev => [res.data,...prev]);
                 setSuccess("Record Added Successfully");
@@ -247,7 +248,7 @@ const handleDelete = async (id) => {
   if (!window.confirm("Are you sure to delete this record?")) return;
 
   try {
-    await axios.delete(`http://localhost:8085/api/services/${id}`);
+    await axios.delete(`${API}/api/services/${id}`);
 
     setRecords(prev => prev.filter(r => r.id !== id));
     setFilteredRecords(prev => prev.filter(r => r.id !== id));

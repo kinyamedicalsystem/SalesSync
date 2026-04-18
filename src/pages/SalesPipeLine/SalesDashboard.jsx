@@ -27,6 +27,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 import { Pie, Bar, Line } from "react-chartjs-2";
 
 export default function Dashboard() {
+    const API=import.meta.env.VITE_BACKEND_URL;
     const [records, setRecords] = useState([]);
 
     const formatCurrency = (num) => {
@@ -39,7 +40,7 @@ export default function Dashboard() {
     }
 
     useEffect(() => {
-        axios.get("http://localhost:8085/api/records")
+        axios.get(`${API}/api/records`)
             .then(res => setRecords(res.data))
             .catch(err => console.log(err));
     }, []);

@@ -19,6 +19,7 @@ ChartJS.register(
     Legend
 );
 export default function ProductForecast() {
+    const API=import.meta.env.VITE_BACKEND_URL;
     const [records, setRecords] = useState([])
 
     const formatCurrency = (amount) => {
@@ -29,7 +30,7 @@ export default function ProductForecast() {
     }
         
     useEffect(() => {
-        axios.get("http://localhost:8085/api/records")
+        axios.get(`${API}/api/records`)
             .then(res => setRecords(res.data))
             .catch(err => console.log(err))
     }, [])

@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState,useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 function Login(){
-
+ const API=import.meta.env.VITE_BACKEND_URL;
 const[error,setError]=useState('');
 const[loading,setLoading]=useState(false)
 const[formdata,setFormData]=useState({email:'',password:'',})
@@ -35,7 +35,7 @@ const handleSubmit= async (e)=>{
       }
 
   try{
-    const res=await axios.post("http://localhost:8085/api/login",formdata)
+    const res=await axios.post(`${API}/api/login`,formdata)
     localStorage.setItem("role",res.data.role);
      localStorage.setItem("user",res.data.user);
      localStorage.setItem("email",res.data.email);

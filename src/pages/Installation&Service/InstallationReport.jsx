@@ -4,6 +4,8 @@ import InstallationPrint from "./InstallationPrint";
 import ReactDOMServer from "react-dom/server"
 
 export default function Intallation() {
+    const API=import.meta.env.VITE_BACKEND_URL;
+
     const inputStyle = "w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-2.5 text-gray-300 focus:border-blue-500 my-3"
     const linkStyle = "px-4 py-2 rounded-lg text-sm font-medium transition-all bg-teal-500/30 duration-300 text-gray-300 hover:text-white hover:bg-teal-500/10 ";
     const Detail = ({ label, value }) => (
@@ -68,7 +70,7 @@ export default function Intallation() {
     const fetchRecords= async () => {
         setLoading(true)
         try {
-            const res = await axios.get("http://localhost:8085/api/installations")
+            const res = await axios.get(`${API}/api/installations`)
             setRecords(res.data)
             setFilteredRecords(res.data)
             setSearchTerm("")
@@ -139,14 +141,14 @@ export default function Intallation() {
         };
         try {
             if (editmode) {
-                const res = await axios.put(`http://localhost:8085/api/installations/${editRecord.id}`, payload);
+                const res = await axios.put(`${API}/api/installations/${editRecord.id}`, payload);
                 setRecords(prev => prev.map(r => r.id === editRecord.id ? res.data : r))
                 setFilteredRecords(prev => prev.map(r => r.id === editRecord.id ? res.data : r))
                 setSuccess("Updated Successfully");
                 setTimeout(() => { setActiveTab("view") }, 700)
             }
             else {
-                const res = await axios.post("http://localhost:8085/api/installations", payload)
+                const res = await axios.post(`${API}/api/installations`, payload)
                 setRecords(prev => [res.data, ...prev]);
                 setFilteredRecords(prev => [res.data, ...prev]);
                 setSuccess("Saved Succesfully")
@@ -215,7 +217,7 @@ export default function Intallation() {
         if (!window.confirm("Are you sure to delete this record?")) return;
 
         try {
-            await axios.delete(`http://localhost:8085/api/installations/${id}`);
+            await axios.delete(`${API}/api/installations/${id}`);
 
             setRecords(prev => prev.filter(r => r.id !== id));
             setFilteredRecords(prev => prev.filter(r => r.id !== id));

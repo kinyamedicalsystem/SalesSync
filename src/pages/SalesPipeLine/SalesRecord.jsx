@@ -1,8 +1,10 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect} from "react";
 import "./Whole.css";
 import axios from "axios";
 
 export default function Records() {
+      const API=import.meta.env.VITE_BACKEND_URL;
+
   const [success, setSuccess] = useState('')
   const[formError,setFormError]=useState({})
   const[loading,setLoading]=useState(false)
@@ -145,7 +147,7 @@ function formatMonth(monthStr) {
   const fetchRecords=async()=>{
     setLoading(true);
     try{
-       const res=await axios.get("http://localhost:8085/api/records")       // ✅ actual backend data
+       const res=await axios.get(`${API}/api/records`)       // ✅ actual backend data
         setRecords(res.data);
         setFilteredRecords(res.data);
         extractFilterOptions(res.data);
@@ -316,7 +318,7 @@ function formatMonth(monthStr) {
     };
     try {
       setaddLoading(true)
-      const res = await axios.post("http://localhost:8085/api/records", newRecord)
+      const res = await axios.post(`${API}/api/records`, newRecord)
       setSuccess('Record added successfully!')
       setTimeout(() => {
         setSuccess('')
@@ -366,7 +368,7 @@ function formatMonth(monthStr) {
       };
 
       const res = await axios.put(
-        `http://localhost:8085/api/records/${editForm.id}`,
+        `${API}/api/records/${editForm.id}`,
         updatedData
       );
 
@@ -400,7 +402,7 @@ function formatMonth(monthStr) {
     if (!window.confirm("Are you sure you want to delete this record?")) return;
 
     try {
-      await axios.delete(`http://localhost:8085/api/records/${id}`);
+      await axios.delete(`${API}/api/records/${id}`);
 
       const updated = records.filter((r) => r.id !== id);
       setRecords(updated);

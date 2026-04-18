@@ -14,6 +14,7 @@ import { Line } from "react-chartjs-2";
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement,Filler);
 
 export default function RevenueForecast() {
+    const API=import.meta.env.VITE_BACKEND_URL;
     const [records, setRecords] = useState([]);
     const formatCurrency = (amount) => {
         return new Intl.NumberFormat('en-IN', {
@@ -29,10 +30,11 @@ export default function RevenueForecast() {
 }
  
     useEffect(() => {
-        axios.get("http://localhost:8085/api/records")
+        axios.get(`${API}/api/records`)
             .then(res => setRecords(res.data))
-            .catch(err => console.log(err))
+            .catch(err => console.error(err))
     }, [])
+   
     {/*MONTHLY FORECAST */ }
     const monthlyMap = {};
     records.forEach(r => {

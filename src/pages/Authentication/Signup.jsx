@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 function SignUp() {
+   const API=import.meta.env.VITE_BACKEND_URL;
     const[formData,setFormdata]=useState({
         name:'',
         email:'',
@@ -37,7 +38,7 @@ function SignUp() {
       }
 
       try{
-        const res=await axios.post("http://localhost:8085/api/signup",formData);
+        const res=await axios.post(`${API}/api/signup`,formData);
         setSuccess(res.data);
         setTimeout(()=>{
           navigate("/");
