@@ -504,7 +504,7 @@ export default function Intallation() {
                                                     <td><input type="number"
                                                         min={0}
                                                         value={row.qty}
-                                                        onChange={(e) => handleItemChange(index, "qty", e.target.value)}
+                                                        onChange={(e) => handleItemChange(index, "qty", Number(e.target.value))}
                                                         className={`${inputStyle} min-w-[120px]`} /></td>
                                                     <td className="text-center">
                                                         <button type="button" onClick={() => deleteItem(index)} className="text-red-400 hover:text-red-500">
@@ -777,7 +777,7 @@ export default function Intallation() {
 
                                     <div>
                                         <div className="text-gray-400 mb-2">Engineer</div>
-                                        {UserName?.toLocaleLowerCase() === r.engineerName?.toLowerCase() ?
+                                        {UserName.toLowerCase().trim() === r.engineerName?.toLowerCase().trim() ?
                                             (<div className="text-purple-200 bg-purple-500/50 border border-purple-500 rounded-full inline-block px-2 py-1 ">{r.engineerName}</div>) : (<div className="text-white">{r.engineerName}</div>)}
                                     </div>
 

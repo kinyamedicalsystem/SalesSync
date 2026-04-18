@@ -26,7 +26,7 @@ export default function Service() {
     const [error, setError] = useState('');
     const[formError,setFormError]=useState({});
     const [addloading, setAddLoading] = useState(false);
-    useEffect(() => {localStorage.setItem("Servicetab", activeTab), [activeTab]})
+    useEffect(() => {localStorage.setItem("Servicetab", activeTab)}, [activeTab])
     useEffect(()=>{fetchRecords()},[])
     useEffect(()=>{const today=new Date().toISOString().split("T")[0]
         setForm(prev=>({...prev,date:today}))
@@ -150,7 +150,7 @@ export default function Service() {
             else {
                 const res = await axios.post(`${API}/api/services`, payload);
                 setRecords(prev => [res.data,...prev]);
-                 setFilteredRecords(prev => [res.data,...prev]);
+                setFilteredRecords(prev => [res.data,...prev]);
                 setSuccess("Record Added Successfully");
                 resetForm();
             }
@@ -161,7 +161,7 @@ export default function Service() {
             setEditRecord(null)
         }
         catch (err) {
-            console.log(err)
+            console.log(err.response?.data)
             setError('Error Saving Data')
             setTimeout(() => setError(''), 1500)
 
@@ -519,7 +519,7 @@ const handlePrint = (record) => {
                                                     <td className="p-3 text-center"><input type="number"
                                                         min={0}
                                                         value={row.qty}
-                                                        onChange={(e) => handleSpareChange(index, "qty", e.target.value)}
+                                                        onChange={(e) => handleSpareChange(index, "qty", Number(e.target.value))}
                                                         className={`${inputStyle} min-w-[120px] `} /></td>
                                                     <td className="text-center"><input type="text"
                                                         value={row.price}
@@ -770,7 +770,7 @@ const handlePrint = (record) => {
 
                                     <div>
                                         <div className="text-gray-400 mb-2">Engineer</div>
-                                        {UserName.toLowerCase() === r.engineerName?.toLowerCase() ?
+                                        {UserName.toLowerCase().trim() === r.engineerName?.toLowerCase().trim() ?
                                             (<div className="text-purple-200 bg-purple-500/50 border border-purple-500 rounded-full inline-block px-2 py-1 ">{r.engineerName}</div>) : (<div className="text-white">{r.engineerName}</div>)}
                                     </div>
 
