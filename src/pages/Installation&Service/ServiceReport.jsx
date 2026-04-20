@@ -149,6 +149,7 @@ export default function Service() {
             }
             else {
                 const res = await axios.post(`${API}/api/services`, payload);
+                    console.log(res.data)
                 setRecords(prev => [res.data,...prev]);
                 setFilteredRecords(prev => [res.data,...prev]);
                 setSuccess("Record Added Successfully");
@@ -295,31 +296,67 @@ const handleDelete = async (id) => {
         return Object.keys(newErrors).length === 0;
     };
 
-const handlePrint = (record) => {
+   const handlePrint = (record) => {
+
   const printContent = ReactDOMServer.renderToString(
-    <ServicePrint record={record} format={formatDateTime} />
+    <ServicePrint record={record} format={formatDateTime}/>
   );
 
-  const originalContent = document.body.innerHTML;
+  const printWindow = window.open("", "_blank");
 
-  document.body.innerHTML = `
+  printWindow.document.write(`
     <html>
       <head>
-        <title>Print</title>
+        <title>Service Report</title>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
         <script src="https://cdn.tailwindcss.com"></script>
+
+        <style>
+          body {
+            margin: 0;
+            padding: 20px;
+            background: #f3f4f6;
+          }
+
+          .print-btn {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: #2563eb;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            z-index: 999;
+          }
+
+          @media print {
+            .print-btn {
+              display: none;
+            }
+            body {
+              padding: 0;
+              background: white;
+            }
+          }
+        </style>
       </head>
-      <body style="background:white;">
+
+      <body>
+
+        <button class="print-btn" onclick="window.print()">
+          <i class="fa-solid fa-file-invoice "></i> Print PDF
+        </button>
+
         ${printContent}
+
       </body>
     </html>
-  `;
+  `);
 
-  window.print();
-
-  document.body.innerHTML = originalContent;
-  window.location.reload();
+  printWindow.document.close();
 };
-
     return (
         <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
               {loading && <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 z-50">

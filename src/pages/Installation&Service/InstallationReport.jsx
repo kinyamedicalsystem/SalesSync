@@ -272,44 +272,64 @@ export default function Intallation() {
 
    const handlePrint = (record) => {
 
-    const printContent = ReactDOMServer.renderToString(
-        <InstallationPrint record={record} format={formatDateTime}/>
-    );
+  const printContent = ReactDOMServer.renderToString(
+    <InstallationPrint record={record} format={formatDateTime}/>
+  );
 
-    const printWindow = window.open("", "_blank");
+  const printWindow = window.open("", "_blank");
 
-    printWindow.document.write(`
-        <html>
-            <head>
-                <title>Installation Report</title>           
-                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-                <script src="https://cdn.tailwindcss.com"></script>
+  printWindow.document.write(`
+    <html>
+      <head>
+        <title>Installation Report</title>
 
-            </head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+        <script src="https://cdn.tailwindcss.com"></script>
 
-            <body>
-            
-                <style>
-                    body{
-                        margin:0;
-                        padding:20px;
-                        background:white;
-                    }
+        <style>
+          body {
+            margin: 0;
+            padding: 20px;
+            background: #f3f4f6;
+          }
 
-                    @media print{
-                        body{
-                            padding:0;
-                        }
-                    }
-                </style>
-                ${printContent}
-            </body>
-        </html>
-    `);
+          .print-btn {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: #2563eb;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            z-index: 999;
+          }
 
-    printWindow.document.close();
-    printWindow.write(printContent);
-    printWindow.print();
+          @media print {
+            .print-btn {
+              display: none;
+            }
+            body {
+              padding: 0;
+              background: white;
+            }
+          }
+        </style>
+      </head>
+
+      <body>
+
+        <button class="print-btn" onclick="window.print()">
+              <i class="fa-solid fa-file-invoice "></i> Print PDF
+        </button>
+
+        ${printContent}
+
+      </body>
+    </html>
+  `);
+
+  printWindow.document.close();
 };
    return (
 
