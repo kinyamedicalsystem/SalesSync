@@ -55,7 +55,16 @@ export default function ServicePrint({ record ,format}) {
                 </div>
 
                 {/* TITLE */}
-                <div className=" text-center font-bold py-2 rounded mb-4" style={{background:"rgba(6, 6, 245, 0.78);",color:"white"}}>
+                <div className="bg-blue-100
+                    text-center
+                    font-bold
+                    text-lg
+                    py-2
+                    my-2
+                    border
+                    border-blue-900
+                    rounded-md
+                    text-blue-900">
                     SERVICE REPORT
                 </div>
 
@@ -92,7 +101,16 @@ export default function ServicePrint({ record ,format}) {
                 </table>
 
                 {/* SERVICE DETAILS */}
-                <div className=" border-none  text-white rounded p-2 font-bold mb-2" style={{background:"rgba(6, 6, 245, 0.78);",color:"white"}}>
+                <div className=" bg-blue-100
+                    text-center
+                    font-bold
+                    text-lg
+                    py-2
+                    my-2
+                    border
+                    border-blue-900
+                    rounded-md
+                    text-blue-900">
                     PROBLEM / SERVICE DETAILS
                 </div>
 
@@ -124,13 +142,22 @@ export default function ServicePrint({ record ,format}) {
                 </table>
 
                 {/* SPARES */}
-                <div className="font-bold mb-2" >
+                <div className="font-bold mb-2 text-lg text-blue-800" >
                     Spares Replaced
                 </div>
 
                 <table className="w-full border-collapse border border-gray-400 text-sm mb-4">
-                    <thead>
-                        <tr style={{background:"rgba(6, 6, 245, 0.78);",color:"white"}}>
+                    <thead className="bg-blue-100
+                    text-center
+                    font-bold
+                    text-lg
+                    py-2
+                    mt-2
+                    border
+                    border-blue-900
+                    rounded-md
+                    text-blue-900">
+                        <tr>
                             <th className="border border-gray-300 p-2">Spare</th>
                             <th className="border border-gary-300 p-2">Qty</th>
                             <th className="border border-gray-300  p-2">Cost</th>

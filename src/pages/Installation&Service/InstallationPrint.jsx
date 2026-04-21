@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function InstallationPrint({ record ,format}) {
+export default function InstallationPrint({ record, format }) {
     return (
         <div className="bg-slate-200  p-4 print:bg-white print:p-0">
 
@@ -18,14 +18,14 @@ export default function InstallationPrint({ record ,format}) {
                 print:border-none
                 print:p-[6mm]
             ">
-  {/* HEADER */}
+                {/* HEADER */}
                 <div className="flex justify-between border-b-2 border-blue-900 pb-3 mb-3 ">
 
                     <div className="flex flex-col gap-2">
                         <h1 className="text-2xl font-extrabold text-blue-900">
                             KINYA<br></br>
                             <span className="font-semibold text-sm">
-                                MEDICAL SYSTEMS AND SOLUTION<br/>
+                                MEDICAL SYSTEMS AND SOLUTION<br />
                                 <span className="italic text-gray-600"> Your Vision, Our Mission</span>
                             </span>
                         </h1>
@@ -34,12 +34,12 @@ export default function InstallationPrint({ record ,format}) {
                         <p>🌐 www.kinya.in</p>
                     </div>
 
-                
-                    <div className="-rotate-45"><div className="w-32 h-32  font-sans  rounded-full border-4 border-green-500 text-center text-lg flex font-bold shadow-xl  shadow-green-500/20 text-green-500 justify-center items-center ">INS COMPLETED <br/>KINYA</div></div>
-                
+
+                    <div className="-rotate-45"><div className="w-32 h-32  font-sans  rounded-full border-4 border-green-500 text-center text-lg flex font-bold shadow-xl  shadow-green-500/20 text-green-500 justify-center items-center ">INS COMPLETED <br />KINYA</div></div>
+
 
                     <div className="text-right flex flex-col gap-2">
-                           <p><strong>GSTIN :</strong> 33AAOFK8368D1Z2</p>
+                        <p><strong>GSTIN :</strong> 33AAOFK8368D1Z2</p>
                         <p><strong>PAN :</strong> AAOFK8368D</p>
                         <p><strong>Drug License :</strong> TN-06-21B-00180</p>
                     </div>
@@ -82,10 +82,10 @@ export default function InstallationPrint({ record ,format}) {
                             <strong>Customer : </strong> {record.customerName}<br></br>
                             <span className="text-gray-600 text-sm mt-2"><i className="fas fa-phone text-sm me-2"></i>{record.customerContact}</span>
                         </div>
-                        
+
                         <div className="border p-4 rounded bg-slate-50">
                             <strong>Engineer : </strong> {record.engineerName}<br></br>
-                             <span className="text-gray-600 text-sm mt-2"><i className="fas fa-phone text-sm me-2"></i>{record.engineerContact}</span>
+                            <span className="text-gray-600 text-sm mt-2"><i className="fas fa-phone text-sm me-2"></i>{record.engineerContact}</span>
                         </div>
 
                         <div className="border p-2 rounded bg-slate-50">
@@ -113,7 +113,16 @@ export default function InstallationPrint({ record ,format}) {
                         <table className="w-full border text-sm">
 
                             <thead>
-                                <tr  style={{background:"rgba(6, 6, 245, 0.78);",color:"white"}}>
+                                <tr className="bg-blue-100
+                              text-center 
+                              font-bold 
+                              text-xl
+                              py-2
+                              mt-3
+                              border
+                              border-blue-900
+                              rounded-md
+                              text-blue-900">
                                     <th className="border p-3">#</th>
                                     <th className="border p-3">Item</th>
                                     <th className="border p-3">Manufacturer</th>
@@ -157,17 +166,17 @@ export default function InstallationPrint({ record ,format}) {
 
                         <div className="border p-3 rounded bg-slate-50">
                             <strong>Demo Given : </strong> {record.demoGiven}
-                             <strong className="ms-5">Training Given:</strong> {record.trainingGiven}
+                            <strong className="ms-5">Training Given:</strong> {record.trainingGiven}
                         </div>
 
 
                         <div className="border p-3 rounded bg-slate-50 col-span-2">
-                          (Event) <span className="text-green">  <strong>Start :</strong> {format(record.eventStart)}</span> → <span><strong>End :</strong> {format(record.eventEnd)}</span>
+                            (Event) <span className="text-green">  <strong>Start :</strong> {format(record.eventStart)}</span> → <span><strong>End :</strong> {format(record.eventEnd)}</span>
                         </div>
-                          <div className="border p-3 rounded bg-slate-50">
+                        <div className="border p-3 rounded bg-slate-50">
                             <strong>Customer Signature : </strong>
                         </div>
-                          <div className="border p-3 rounded bg-slate-50">
+                        <div className="border p-3 rounded bg-slate-50">
                             <strong>Engineer Signature : </strong>
                         </div>
 
@@ -193,7 +202,7 @@ export default function InstallationPrint({ record ,format}) {
                 <div className="mt-3 text-center text-xs border-t pt-4 text-gray-600">
                     Thank you for choosing Kinya Medical Systems
                     <p>
-                    Plot No.55 Mahalakshmi Nagar, Guduvanchery, Chennai - 603202
+                        Plot No.55 Mahalakshmi Nagar, Guduvanchery, Chennai - 603202
                     </p>
                 </div>
 
