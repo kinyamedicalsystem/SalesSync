@@ -143,7 +143,7 @@ export default function Service() {
             if (editMode) {
                 const res = await axios.put(`${API}/api/services/${editRecord.id}`, payload);
                 setRecords(prev => prev.map(r => r.id === editRecord.id ? res.data : r))
-                 setFilteredRecords(prev => prev.map(r => r.id === editRecord.id ? res.data : r))
+                setFilteredRecords(prev => prev.map(r => r.id === editRecord.id ? res.data : r))
                 setSuccess("Updated Successfully");
                 setTimeout(() => { setActiveTab("viewRepo") }, 700)
             }
@@ -967,7 +967,7 @@ const handleDelete = async (id) => {
                         {/* ACTIONS */}
                         <div className="flex flex-col sm:flex-row justify-end gap-3">
 
-                            <button className="px-4 py-2 rounded-lg bg-purple-600  text-white hover:bg-purple-700">
+                            <button className="px-4 py-2 rounded-lg bg-purple-600  text-white hover:bg-purple-700" onClick={()=>handlePrint(selectedRecord)}>
                                 <i className="fas fa-file-pdf mr-2"></i> PDF
                             </button>
 

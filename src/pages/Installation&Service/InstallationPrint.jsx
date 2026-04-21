@@ -113,7 +113,7 @@ export default function InstallationPrint({ record ,format}) {
                         <table className="w-full border text-sm">
 
                             <thead>
-                                <tr className="bg-blue-900 text-white rounded ">
+                                <tr  style={{background:"rgba(6, 6, 245, 0.78);",color:"white"}}>
                                     <th className="border p-3">#</th>
                                     <th className="border p-3">Item</th>
                                     <th className="border p-3">Manufacturer</th>

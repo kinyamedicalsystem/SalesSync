@@ -933,7 +933,7 @@ export default function Intallation() {
                         {/* ACTIONS */}
                         <div className="flex flex-col sm:flex-row justify-end gap-3">
 
-                            <button className="px-4 py-2 rounded-lg bg-purple-600  text-white hover:bg-purple-700">
+                            <button className="px-4 py-2 rounded-lg bg-purple-600  text-white hover:bg-purple-700" onClick={()=>handlePrint(selectedRecord)}>
                                 <i className="fas fa-file-pdf mr-2"></i> PDF
                             </button>
 

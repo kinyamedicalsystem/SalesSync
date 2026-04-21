@@ -21,7 +21,7 @@ export default function ServicePrint({ record ,format}) {
             ">
 
                 {/* HEADER */}
-                <div className="flex justify-between border-b-2 border-blue-900 pb-3 mb-3 ">
+                <div className="flex justify-between border-b-2 border-blue-900 pb-3 mb-3 " >
 
                     <div className="flex flex-col gap-2">
                         <h1 className="text-2xl font-extrabold text-blue-900">
@@ -55,7 +55,7 @@ export default function ServicePrint({ record ,format}) {
                 </div>
 
                 {/* TITLE */}
-                <div className="bg-blue-900 text-white text-center font-bold py-2 rounded mb-4">
+                <div className=" text-center font-bold py-2 rounded mb-4" style={{background:"rgba(6, 6, 245, 0.78);",color:"white"}}>
                     SERVICE REPORT
                 </div>
 
@@ -73,7 +73,7 @@ export default function ServicePrint({ record ,format}) {
                             <td className="border p-2"><b>Equipment :</b> {record.equipmentName}</td>
                         </tr>
 
-                        <tr>
+                        <tr className="text-wrap">
                             <td className="border p-2"><b>Address :</b> {record.address}</td>
                             <td className="border p-2"><b>Serial No :</b> {record.serialNo}</td>
                         </tr>
@@ -92,7 +92,7 @@ export default function ServicePrint({ record ,format}) {
                 </table>
 
                 {/* SERVICE DETAILS */}
-                <div className="bg-blue-900 border border-none  text-white  p-2 font-bold mb-2">
+                <div className=" border-none  text-white rounded p-2 font-bold mb-2" style={{background:"rgba(6, 6, 245, 0.78);",color:"white"}}>
                     PROBLEM / SERVICE DETAILS
                 </div>
 
@@ -124,13 +124,13 @@ export default function ServicePrint({ record ,format}) {
                 </table>
 
                 {/* SPARES */}
-                <div className="font-bold mb-2">
+                <div className="font-bold mb-2" >
                     Spares Replaced
                 </div>
 
                 <table className="w-full border-collapse border border-gray-400 text-sm mb-4">
                     <thead>
-                        <tr className="bg-blue-900  text-white">
+                        <tr style={{background:"rgba(6, 6, 245, 0.78);",color:"white"}}>
                             <th className="border border-gray-300 p-2">Spare</th>
                             <th className="border border-gary-300 p-2">Qty</th>
                             <th className="border border-gray-300  p-2">Cost</th>
