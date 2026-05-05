@@ -1064,7 +1064,7 @@ function formatMonth(monthStr) {
               <table className="w-full">
                 <thead className="bg-gray-800 border-b border-gray-700">
                   <tr>
-                    {["Date", "Doctor", "Hospital", "Product", "currentUnit", "Email", "Notes", "Distributor", "Sales Person", "Stage", "Potential (₹)", "Winning %", "Buying %", "Total %", "Forecast (₹)", "Forecast Month", "Closed Month", "Actions"].map((header) => (
+                    {["Date","Stage", "Notes", "Doctor", "Hospital", "Product", "currentUnit", "Email","Distributor", "Sales Person", "Potential (₹)", "Winning %", "Buying %", "Total %", "Forecast (₹)", "Forecast Month", "Closed Month", "Actions"].map((header) => (
                       <th key={header} className="px-6 py-4 text-center text-sm font-semibold text-gray-300">
                         {header}
                       </th>
@@ -1084,6 +1084,12 @@ function formatMonth(monthStr) {
                       <tr key={record.id} className="border-b border-gray-700/50 text-center hover:bg-gray-800/50 transition-colors">
                         <td className="px-6  py-3   text-gray-300">{record.date}</td>
                         <td className="px-6 py-3">
+                          <span className={`px-4 flex justify-center  py-1 rounded-full text-xs font-medium ${getStageColor(record.pipelineStage)}`}>
+                            {record.pipelineStage}
+                          </span>
+                        </td>
+                        <td className="px-6 py-3 text-gray-300">{record.notes}</td>
+                        <td className="px-6 py-3">
                           <div className="font-medium text-gray-200">{record.drName}</div>
                           <div className="text-sm text-cyan-400">{record.phone}</div>
                         </td>
@@ -1094,7 +1100,7 @@ function formatMonth(monthStr) {
                         <td className="px-6 py-3 text-gray-300">{record.productName}</td>
                         <td className="px-6 py-3 text-gray-300">{record.currentUnit}</td>
                         <td className="px-6 py-3 text-gray-300">{record.email}</td>
-                        <td className="px-6 py-3 text-gray-300">{record.notes}</td>
+                    
                         <td className="px-6 py-3 text-gray-300">{record.distributorName}</td>
                         <td className="px-6 py-3 text-gray-300">
                           {record.salesPerson?.toLowerCase() === currentUser?.toLowerCase() ? (
@@ -1103,11 +1109,7 @@ function formatMonth(monthStr) {
                             </span>) : (<span >{record.salesPerson}</span>)}
 
                         </td>
-                        <td className="px-6 py-3">
-                          <span className={`px-4 flex justify-center  py-1 rounded-full text-xs font-medium ${getStageColor(record.pipelineStage)}`}>
-                            {record.pipelineStage}
-                          </span>
-                        </td>
+                    
                         <td className="px-6 py-3 text-gray-300">{formatCurrency(record.potentialValue)}</td>
                         <td className="px-6 py-3 text-gray-300">{record.winningPercentage}%</td>
                         <td className="px-6 py-3 text-gray-300">{record.buyingPercentage}%</td>
